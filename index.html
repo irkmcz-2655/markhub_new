@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MarkHUB — Закрытая платформа для маркетологов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --orange: #E85D20;
+  --orange-light: #FFF0E8;
+  --blue: #1E6FD9;
+  --blue-light: #E8F2FF;
+  --black: #0F0F0E;
+  --dark: #1A1A18;
+  --gray: #6B6B67;
+  --gray-light: #F5F4F0;
+  --border: rgba(15,15,14,0.1);
+  --white: #FAFAF8;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Manrope', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--white); color: var(--black); -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 48px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--black); text-decoration: none; letter-spacing: -0.02em; }
+.nav-logo span { color: var(--orange); }
+.nav-cta {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  background: var(--orange); color: #fff; border: none; padding: 9px 20px; border-radius: 2px;
+  text-decoration: none; transition: background 0.2s;
+}
+.nav-cta:hover { background: #c94d15; }
+
+/* ── WRAP ── */
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 48px; }
+
+/* ── HERO ── */
+.hero { padding: 72px 0 64px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.hero::before {
+  content: 'M'; position: absolute; right: -20px; top: -40px;
+  font-family: var(--serif); font-size: 420px; font-weight: 900;
+  color: rgba(232,93,32,0.06); line-height: 1; pointer-events: none; user-select: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--orange); color: var(--orange);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 2px; margin-bottom: 28px;
+}
+.hero-badge::before { content: '●'; font-size: 8px; }
+.hero h1 {
+  font-family: var(--serif); font-size: 72px; font-weight: 900;
+  line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 8px;
+}
+.hero h1 .accent { color: var(--orange); font-style: italic; }
+.hero-sub {
+  font-size: 17px; line-height: 1.75; color: var(--gray);
+  max-width: 600px; margin-bottom: 40px; margin-top: 16px;
+  border-left: 3px solid var(--blue); padding-left: 16px;
+}
+.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.btn-primary {
+  font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  background: var(--orange); color: #fff; border: none; padding: 14px 28px; border-radius: 2px;
+  text-decoration: none; display: inline-block; transition: background 0.2s; cursor: pointer;
+}
+.btn-primary:hover { background: #c94d15; }
+.btn-secondary {
+  font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  background: transparent; color: var(--black); border: 1px solid var(--border); padding: 14px 28px; border-radius: 2px;
+  text-decoration: none; display: inline-block; transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover { border-color: var(--black); background: var(--gray-light); }
+.hero-price { font-size: 14px; color: var(--gray); }
+.hero-price strong { color: var(--black); font-weight: 600; }
+
+/* ── SECTIONS ── */
+.section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+.section-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--serif); font-size: 48px; font-weight: 900;
+  line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 40px;
+}
+.section-title .accent { color: var(--orange); font-style: italic; }
+.section-title .blue { color: var(--blue); }
+
+/* ── FOR WHO ── */
+.for-who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.fw-card { background: var(--white); padding: 32px 28px; }
+.fw-card:hover { background: var(--orange-light); }
+.fw-num { font-family: var(--serif); font-size: 48px; font-weight: 900; color: rgba(232,93,32,0.15); line-height: 1; margin-bottom: 16px; }
+.fw-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.fw-text { font-size: 14px; line-height: 1.7; color: var(--gray); }
+
+/* ── BENEFITS ── */
+.benefits-intro { font-size: 17px; line-height: 1.75; color: var(--gray); margin-bottom: 40px; max-width: 560px; border-left: 3px solid var(--orange); padding-left: 16px; }
+.benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.benefit-item { background: var(--white); padding: 28px 28px; display: flex; gap: 20px; align-items: flex-start; transition: background 0.2s; }
+.benefit-item:hover { background: var(--gray-light); }
+.benefit-icon { width: 36px; height: 36px; background: var(--orange-light); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.benefit-icon svg { width: 18px; height: 18px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.benefit-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.benefit-text { font-size: 13px; line-height: 1.65; color: var(--gray); }
+
+/* ── SCHEDULE ── */
+.schedule-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+.schedule-note { font-size: 12px; color: var(--gray); border: 1px solid var(--border); padding: 5px 14px; border-radius: 2px; }
+.event-list { display: flex; flex-direction: column; }
+.event-item { display: grid; grid-template-columns: 200px 140px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--border); align-items: start; }
+.event-item:last-child { border-bottom: 1px solid var(--border); }
+.event-date { font-size: 14px; font-weight: 600; color: var(--black); }
+.event-time { font-size: 13px; color: var(--gray); margin-top: 3px; }
+.event-type { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 1px; margin-bottom: 8px; }
+.type-guest { background: var(--blue-light); color: var(--blue); }
+.type-webinar { background: var(--orange-light); color: var(--orange); }
+.type-mastermind { background: #F0F0F0; color: #444; }
+.type-offline { background: #E8F5E9; color: #2E7D32; }
+.event-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.event-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.schedule-footnote { margin-top: 20px; font-size: 12px; color: var(--gray); font-style: italic; padding-left: 16px; border-left: 2px solid var(--border); }
+
+/* ── ARCHIVE ── */
+.archive-intro { font-size: 16px; line-height: 1.75; color: var(--gray); margin-bottom: 40px; }
+.archive-block { margin-bottom: 40px; }
+.archive-block-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--orange); display: flex; align-items: center; gap: 12px; }
+.archive-block-title .tag { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: var(--orange-light); color: var(--orange); padding: 3px 10px; border-radius: 1px; }
+.archive-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.archive-list li { font-size: 14px; line-height: 1.65; color: var(--gray); padding-left: 20px; position: relative; }
+.archive-list li::before { content: '—'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+.archive-big { background: var(--gray-light); border-left: 4px solid var(--orange); padding: 24px 28px; margin-bottom: 24px; }
+.archive-big-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+.archive-big-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.archive-big-text { font-size: 14px; color: var(--gray); line-height: 1.65; }
+
+/* ── REVIEWS ── */
+.reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.review-placeholder { border: 1px dashed var(--border); padding: 40px 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 200px; }
+.review-placeholder svg { width: 36px; height: 36px; stroke: var(--border); fill: none; stroke-width: 1.5; }
+.review-placeholder p { font-size: 12px; color: var(--gray); text-align: center; line-height: 1.6; }
+
+/* ── PRICE ── */
+.price-box { border: 2px solid var(--black); padding: 48px; max-width: 560px; }
+.price-headline { font-family: var(--serif); font-size: 36px; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.02em; }
+.price-amount { font-size: 56px; font-weight: 900; color: var(--orange); line-height: 1; margin-bottom: 4px; font-family: var(--serif); }
+.price-period { font-size: 14px; color: var(--gray); margin-bottom: 32px; }
+.price-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.price-list li { font-size: 14px; display: flex; align-items: flex-start; gap: 10px; }
+.price-list li::before { content: '✓'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+
+/* ── FINAL CTA ── */
+.final-cta { padding: 80px 0; background: var(--dark); }
+.final-cta .wrap { display: flex; justify-content: space-between; align-items: center; gap: 48px; }
+.fca-text h2 { font-family: var(--serif); font-size: 48px; font-weight: 900; color: #fff; line-height: 1.1; letter-spacing: -0.025em; max-width: 480px; }
+.fca-text h2 .accent { color: var(--orange); font-style: italic; }
+.fca-sub { font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 12px; max-width: 440px; line-height: 1.7; }
+.fca-right { flex-shrink: 0; }
+.btn-primary-lg {
+  font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  background: var(--orange); color: #fff; border: none; padding: 18px 36px; border-radius: 2px;
+  text-decoration: none; display: inline-block; transition: background 0.2s; white-space: nowrap;
+}
+.btn-primary-lg:hover { background: #c94d15; }
+.fca-price { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 10px; text-align: center; }
+
+/* ── FOOTER ── */
+footer { background: var(--black); color: rgba(255,255,255,0.5); padding: 48px 0; }
+.footer-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.footer-logo { font-family: var(--serif); font-size: 24px; font-weight: 900; color: #fff; margin-bottom: 16px; }
+.footer-logo span { color: var(--orange); }
+.footer-desc { font-size: 13px; line-height: 1.75; color: rgba(255,255,255,0.5); }
+.footer-contacts h4 { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+.contact-link { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; margin-bottom: 12px; transition: color 0.2s; }
+.contact-link:hover { color: #fff; }
+.contact-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.wa { background: #25D366; }
+.tg { background: #2AABEE; }
+.contact-icon svg { width: 16px; height: 16px; fill: #fff; }
+.footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; color: rgba(255,255,255,0.25); display: flex; justify-content: space-between; }
+
+/* ── ANIMATIONS ── */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .wrap { padding: 0 20px; }
+  .hero h1 { font-size: 42px; }
+  .hero::before { font-size: 220px; right: -10px; top: -20px; }
+  .section-title { font-size: 32px; }
+  .for-who-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .event-item { grid-template-columns: 1fr; gap: 8px; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .final-cta .wrap { flex-direction: column; align-items: flex-start; }
+  .fca-text h2 { font-size: 32px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+  .price-box { padding: 28px 20px; }
+  .price-amount { font-size: 44px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Mark<span>HUB</span></a>
+  <a class="nav-cta" href="#price">Вступить — 13 € →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-badge">Закрытая платформа для маркетологов</div>
+    <h1>Маркетинг на<br><span class="accent">европейском</span><br>рынке</h1>
+    <p class="hero-sub">MarkHUB — закрытая платформа для маркетологов и предпринимателей, которые хотят работать с европейскими клиентами, понимать особенности рынка, развиваться в сильной профессиональной среде.</p>
+    <div class="hero-actions">
+      <a href="#price" class="btn-primary">Вступить в MarkHUB →</a>
+      <a href="#schedule" class="btn-secondary">Расписание марта–апреля</a>
+    </div>
+    <p class="hero-price"><strong>13 €</strong> в месяц &nbsp;·&nbsp; Мероприятия каждую неделю</p>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="section" id="for-who">
+  <div class="wrap">
+    <p class="section-eyebrow">Для кого</p>
+    <h2 class="section-title">Кому подойдёт <span class="accent">MarkHUB</span></h2>
+    <div class="for-who-grid fade-in">
+      <div class="fw-card">
+        <div class="fw-num">01</div>
+        <p class="fw-title">Ты маркетолог</p>
+        <p class="fw-text">Стратег, SMM, таргетолог, контентщик — хочешь находить заказчиков из Европы и понимать, как здесь работает рынок.</p>
+      </div>
+      <div class="fw-card">
+        <div class="fw-num">02</div>
+        <p class="fw-title">Ты предприниматель</p>
+        <p class="fw-text">Запускаешь или масштабируешь бизнес на европейскую аудиторию и хочешь делать это без впустую потраченных бюджетов.</p>
+      </div>
+      <div class="fw-card">
+        <div class="fw-num">03</div>
+        <p class="fw-title">Ты фрилансер</p>
+        <p class="fw-text">Хочешь выходить на европейских клиентов, понимать их ожидания и продавать себя дороже — и иметь рядом коллег, с которыми можно посоветоваться.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section" id="benefits">
+  <div class="wrap">
+    <p class="section-eyebrow">Что ты получаешь</p>
+    <h2 class="section-title">Что ты получаешь<br>в <span class="accent">MarkHUB</span></h2>
+    <p class="benefits-intro">MarkHUB — это место, где маркетинг рассматривается как реальный инструмент роста.</p>
+    <div class="benefits-grid fade-in">
+      <div class="benefit-item">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div>
+          <p class="benefit-title">Понимание европейского рынка</p>
+          <p class="benefit-text">Особенности продаж, коммуникации и продвижения в разных странах ЕС.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div>
+          <p class="benefit-title">Обратная связь по твоим задачам</p>
+          <p class="benefit-text">Мастермайнды и разборы ситуаций — приноси свои вопросы и получай ответы от практиков.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div>
+          <p class="benefit-title">Своя среда и нетворкинг</p>
+          <p class="benefit-text">Люди с похожим опытом и целями. Здесь находят партнёров, заказчиков и профессиональный рост.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div>
+          <p class="benefit-title">База знаний с первого дня</p>
+          <p class="benefit-text">Записи вебинаров, разборы кейсов, гайды и презентации доступны сразу после вступления.</p>
+        </div>
+      </div>
+      <div class="benefit-item" style="grid-column: 1 / -1;">
+        <div class="benefit-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div>
+          <p class="benefit-title">Регулярный ритм и живые форматы</p>
+          <p class="benefit-text">Вебинары, Pitch Nights, брейнштормы, офлайн-встречи. Каждый месяц — насыщенная программа.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="section" id="schedule">
+  <div class="wrap">
+    <p class="section-eyebrow">Расписание</p>
+    <div class="schedule-header">
+      <h2 class="section-title" style="margin-bottom:0;">Март <span class="accent">2026</span></h2>
+      <span class="schedule-note">Все события включены в подписку</span>
+    </div>
+    <div class="event-list fade-in">
+      <div class="event-item">
+        <div>
+          <p class="event-date">4 марта, среда</p>
+          <p class="event-time">17:00–19:00</p>
+        </div>
+        <div><span class="event-type type-guest">Встреча с гостем</span></div>
+        <div>
+          <p class="event-title">PR как инструмент продаж</p>
+          <p class="event-desc">Александр Доброер о роли PR в маркетинге, работе с возражениями клиентов и коммуникациях на локальных рынках.</p>
+        </div>
+      </div>
+      <div class="event-item">
+        <div>
+          <p class="event-date">14 марта, суббота</p>
+          <p class="event-time">11:00–13:00</p>
+        </div>
+        <div><span class="event-type type-webinar">Вебинар</span></div>
+        <div>
+          <p class="event-title">Гибкая продуктивность</p>
+          <p class="event-desc">Анна Кононова о том, как двигаться к целям, не выгорая и не живя в режиме «ещё чуть-чуть потерпеть».</p>
+        </div>
+      </div>
+      <div class="event-item">
+        <div>
+          <p class="event-date">19 марта, четверг</p>
+          <p class="event-time">17:00–19:00</p>
+        </div>
+        <div><span class="event-type type-mastermind">Мастермайнд</span></div>
+        <div>
+          <p class="event-title">Разбор твоих ситуаций</p>
+          <p class="event-desc">Мастермайнд с Полиной Шкаленковой. Приноси вопросы — обсуждаем спокойно и по существу.</p>
+        </div>
+      </div>
+      <div class="event-item">
+        <div>
+          <p class="event-date">26 марта, четверг</p>
+          <p class="event-time">17:00–19:00</p>
+        </div>
+        <div><span class="event-type type-offline">Офлайн</span></div>
+        <div>
+          <p class="event-title">Как придумывать идеи для проектов</p>
+          <p class="event-desc">Брейнштормим с Полиной Шкаленковой. Живое обсуждение, совместная генерация идей, практическая работа.</p>
+        </div>
+      </div>
+    </div>
+    <p class="schedule-footnote">Участники клуба могут предлагать свои темы и выступать. Каждый месяц мы проводим дополнительные форматы для активации творческого мышления.</p>
+  </div>
+</section>
+
+<!-- ARCHIVE -->
+<section class="section" id="archive">
+  <div class="wrap">
+    <p class="section-eyebrow">База знаний</p>
+    <h2 class="section-title">Доступно сразу<br>после <span class="accent">вступления</span></h2>
+
+    <div class="archive-block fade-in">
+      <p class="archive-block-title">Мастермайнды — разборы реальных проектов <span class="tag">В записи</span></p>
+      <p style="font-size:14px;color:var(--gray);margin-bottom:16px;line-height:1.7;">Каждый мастермайнд — это живое обсуждение конкретных бизнес-ситуаций. Из того, что уже есть в записи:</p>
+      <ul class="archive-list">
+        <li>Косметологическая клиника: как выйти на премиальную аудиторию и привлекать клиентов из Германии на процедуры в Чехии</li>
+        <li>Продажа медицинского оборудования: B2B-продажи, как маркетологу зайти в компанию и получить проект</li>
+        <li>Проект на стыке ИИ и Telegram: воронки продаж и работа с возражениями аудитории</li>
+        <li>Таргетированная реклама: как отслеживать эффективность и повышать доходимость лидов до сделки</li>
+        <li>Автошины и диски: варианты воронок без каталога на сайте</li>
+      </ul>
+    </div>
+
+    <div class="archive-big fade-in">
+      <p class="archive-big-label">Вебинар</p>
+      <p class="archive-big-title">Универсальные воронки через таргетированную рекламу</p>
+      <p class="archive-big-text">Почти 3 часа живого разбора — воронки продаж, продуктовая матрица, реальные кейсы по нишам. Спикер — основатель агентства с рекламными бюджетами более 2 млн $ в год.</p>
+    </div>
+
+    <div class="archive-big fade-in">
+      <p class="archive-big-label">Запись</p>
+      <p class="archive-big-title">Продажи через контент — Степан Лаппо</p>
+      <ul class="archive-list" style="margin-top:8px;">
+        <li>Контент-стратегию для риэлтора в Праге и школы маникюра</li>
+        <li>Как создать вирусный ролик</li>
+        <li>Что делать, если ролик уже залетел — как усилить результат</li>
+      </ul>
+    </div>
+
+    <div class="archive-big fade-in">
+      <p class="archive-big-label">Запись</p>
+      <p class="archive-big-title">Тренды маркетинга 2026 — Анна Кононова</p>
+      <p class="archive-big-text">Стратегическая сессия с разбором ключевых трендов. Каждый тренд — с конкретными примерами и объяснением, как применять в малом и среднем бизнесе.</p>
+    </div>
+
+    <div class="archive-big fade-in">
+      <p class="archive-big-label">Гайд</p>
+      <p class="archive-big-title">Работа с клиентом — от диагностики до продажи</p>
+      <ul class="archive-list" style="margin-top:8px;">
+        <li>Провести первичную диагностику</li>
+        <li>Сформировать из неё предложение</li>
+        <li>Понять, почему «клиентов нет» часто означает, что мы просто смотрим не в ту сторону</li>
+      </ul>
+    </div>
+
+    <p style="font-size:14px;color:var(--gray);margin-top:24px;font-style:italic;">И другие записи, разборы и материалы — база регулярно пополняется.</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" id="reviews">
+  <div class="wrap">
+    <p class="section-eyebrow">Отзывы</p>
+    <h2 class="section-title">Что говорят<br>в <span class="accent">клубе</span></h2>
+    <div class="reviews-grid fade-in">
+      <div class="review-placeholder">
+        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <p>Видео-отзыв<br><span style="opacity:0.5">дата · тема</span></p>
+      </div>
+      <div class="review-placeholder">
+        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <p>Видео-отзыв<br><span style="opacity:0.5">дата · тема</span></p>
+      </div>
+      <div class="review-placeholder">
+        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <p>Видео-отзыв<br><span style="opacity:0.5">дата · тема</span></p>
+      </div>
+      <div class="review-placeholder">
+        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <p>Видео-отзыв<br><span style="opacity:0.5">дата · тема</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="section" id="price">
+  <div class="wrap">
+    <p class="section-eyebrow">Цена</p>
+    <h2 class="section-title">Одна подписка —<br><span class="accent">всё включено</span></h2>
+    <div class="price-box fade-in">
+      <div class="price-amount">13 €</div>
+      <p class="price-period">в месяц · онлайн и офлайн</p>
+      <ul class="price-list">
+        <li>Еженедельные вебинары и разборы</li>
+        <li>Мастермайнды с кейсами участников</li>
+        <li>Pitch Nights и специальные форматы</li>
+        <li>Офлайн-встречи и брейнштормы</li>
+        <li>Доступ к закрытому сообществу</li>
+        <li>Записи всех встреч и база знаний</li>
+        <li>Гайды, кейсы и статьи по европейским рынкам</li>
+      </ul>
+      <a href="#" class="btn-primary">Вступить в MarkHUB →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrap">
+    <div class="fca-text">
+      <h2>Готов работать на <span class="accent">европейский</span> рынок?</h2>
+      <p class="fca-sub">Вступай в MarkHUB и в первый же день получи доступ к архиву встреч, кейсам и живому профессиональному сообществу.</p>
+    </div>
+    <div class="fca-right">
+      <a href="#" class="btn-primary-lg">Вступить за 13 € →</a>
+      <p class="fca-price">Мероприятия каждую неделю</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-logo">Mark<span>HUB</span></p>
+        <p class="footer-desc">MarkHUB создан IRKM — Институтом реквалификационных курсов маркетинга в Праге. Мы обучаем маркетологов для европейского рынка с официальным дипломом, признанным Министерством образования Чехии, и выпускниками по всей Европе. Спикеры и эксперты MarkHUB — практики, которые знают европейский рынок изнутри и работают с ним каждый день.</p>
+      </div>
+      <div class="footer-contacts">
+        <h4>Связаться с нами</h4>
+        <a class="contact-link" href="https://wa.me/420775561206" target="_blank" rel="noopener">
+          <div class="contact-icon wa">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </div>
+          WhatsApp +420 775 561 206
+        </a>
+        <a class="contact-link" href="https://t.me/irkm_cz" target="_blank" rel="noopener">
+          <div class="contact-icon tg">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </div>
+          Telegram @irkm_cz
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 MarkHUB by IRKM</span>
+      <span>Прага, Чехия</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
