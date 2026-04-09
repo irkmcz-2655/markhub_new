@@ -109,14 +109,60 @@ nav {
 .fw-text { font-size: 14px; line-height: 1.7; color: var(--gray); }
 
 /* ── BENEFITS ── */
-.benefits-intro { font-size: 17px; line-height: 1.75; color: var(--gray); margin-bottom: 40px; max-width: 560px; border-left: 3px solid var(--orange); padding-left: 16px; }
-.benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-.benefit-item { background: var(--white); padding: 28px 28px; display: flex; gap: 20px; align-items: flex-start; transition: background 0.2s; }
-.benefit-item:hover { background: var(--gray-light); }
-.benefit-icon { width: 36px; height: 36px; background: var(--orange-light); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.benefit-icon svg { width: 18px; height: 18px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.benefit-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.benefits-intro { font-size: 17px; line-height: 1.75; color: var(--gray); margin-bottom: 56px; max-width: 560px; border-left: 3px solid var(--orange); padding-left: 16px; }
+
+/* ── TRACK ── */
+.benefits-track-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 16px; margin: 0 -48px; padding-left: 48px; padding-right: 48px; }
+.benefits-track-wrap::-webkit-scrollbar { height: 3px; }
+.benefits-track-wrap::-webkit-scrollbar-track { background: var(--border); }
+.benefits-track-wrap::-webkit-scrollbar-thumb { background: var(--orange); }
+.benefits-track { display: flex; gap: 0; align-items: stretch; min-width: max-content; position: relative; padding-top: 56px; }
+
+/* connector line */
+.benefits-track::before {
+  content: '';
+  position: absolute; top: 27px; left: 40px; right: 40px; height: 2px;
+  background: var(--border);
+}
+
+.benefit-station {
+  display: flex; flex-direction: column; align-items: flex-start;
+  width: 220px; flex-shrink: 0; padding: 0 24px 0 0; position: relative;
+  cursor: default;
+}
+.benefit-station:last-child { padding-right: 0; }
+
+/* dot on the line */
+.station-dot {
+  position: absolute; top: -42px; left: 0;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--border);
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+  z-index: 1;
+}
+.benefit-station:hover .station-dot {
+  background: var(--orange); border-color: var(--orange); transform: scale(1.4);
+}
+
+/* station number */
+.station-num {
+  font-family: var(--serif); font-size: 13px; font-style: italic;
+  color: var(--gray); margin-bottom: 16px; position: absolute; top: -64px; left: 18px;
+  transition: color 0.25s;
+}
+.benefit-station:hover .station-num { color: var(--orange); }
+
+/* card */
+.station-card {
+  background: var(--white); border: 1px solid var(--border);
+  padding: 20px 20px; width: 100%;
+  transition: border-color 0.25s, background 0.25s;
+}
+.benefit-station:hover .station-card { border-color: var(--orange); background: var(--orange-light); }
+.benefit-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; transition: color 0.2s; line-height: 1.3; }
+.benefit-station:hover .benefit-title { color: var(--orange); }
 .benefit-text { font-size: 13px; line-height: 1.65; color: var(--gray); }
+.track-hint { font-size: 11px; color: var(--gray); letter-spacing: 0.06em; margin-top: 20px; opacity: 0.6; display: none; }
 
 /* ── SCHEDULE ── */
 .schedule-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
@@ -205,7 +251,8 @@ footer { background: var(--black); color: rgba(255,255,255,0.5); padding: 48px 0
   .hero::before { font-size: 220px; right: -10px; top: -20px; }
   .section-title { font-size: 32px; }
   .for-who-grid { grid-template-columns: 1fr; }
-  .benefits-grid { grid-template-columns: 1fr; }
+  .benefits-track-wrap { margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
+  .track-hint { display: block; }
   .event-item { grid-template-columns: 1fr; gap: 8px; }
   .reviews-grid { grid-template-columns: 1fr; }
   .final-cta .wrap { flex-direction: column; align-items: flex-start; }
@@ -269,42 +316,56 @@ footer { background: var(--black); color: rgba(255,255,255,0.5); padding: 48px 0
     <p class="section-eyebrow">Что ты получаешь</p>
     <h2 class="section-title">Что ты получаешь<br>в <span class="accent">MarkHUB</span></h2>
     <p class="benefits-intro">MarkHUB — это место, где маркетинг рассматривается как реальный инструмент роста.</p>
-    <div class="benefits-grid fade-in">
-      <div class="benefit-item">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <div>
-          <p class="benefit-title">Понимание европейского рынка</p>
-          <p class="benefit-text">Особенности продаж, коммуникации и продвижения в разных странах ЕС.</p>
+    <div class="benefits-track-wrap fade-in">
+      <div class="benefits-track">
+
+        <div class="benefit-station">
+          <span class="station-num">01</span>
+          <div class="station-dot"></div>
+          <div class="station-card">
+            <p class="benefit-title">Понимание европейского рынка</p>
+            <p class="benefit-text">Особенности продаж, коммуникации и продвижения в разных странах ЕС.</p>
+          </div>
         </div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div>
-          <p class="benefit-title">Обратная связь по твоим задачам</p>
-          <p class="benefit-text">Мастермайнды и разборы ситуаций — приноси свои вопросы и получай ответы от практиков.</p>
+
+        <div class="benefit-station">
+          <span class="station-num">02</span>
+          <div class="station-dot"></div>
+          <div class="station-card">
+            <p class="benefit-title">Обратная связь по задачам</p>
+            <p class="benefit-text">Мастермайнды и разборы ситуаций — приноси вопросы и получай ответы от практиков.</p>
+          </div>
         </div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <div>
-          <p class="benefit-title">Своя среда и нетворкинг</p>
-          <p class="benefit-text">Люди с похожим опытом и целями. Здесь находят партнёров, заказчиков и профессиональный рост.</p>
+
+        <div class="benefit-station">
+          <span class="station-num">03</span>
+          <div class="station-dot"></div>
+          <div class="station-card">
+            <p class="benefit-title">Своя среда и нетворкинг</p>
+            <p class="benefit-text">Люди с похожим опытом и целями. Здесь находят партнёров, заказчиков и рост.</p>
+          </div>
         </div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <div>
-          <p class="benefit-title">База знаний с первого дня</p>
-          <p class="benefit-text">Записи вебинаров, разборы кейсов, гайды и презентации доступны сразу после вступления.</p>
+
+        <div class="benefit-station">
+          <span class="station-num">04</span>
+          <div class="station-dot"></div>
+          <div class="station-card">
+            <p class="benefit-title">База знаний с первого дня</p>
+            <p class="benefit-text">Записи вебинаров, кейсы, гайды и презентации — доступны сразу после вступления.</p>
+          </div>
         </div>
-      </div>
-      <div class="benefit-item" style="grid-column: 1 / -1;">
-        <div class="benefit-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div>
-          <p class="benefit-title">Регулярный ритм и живые форматы</p>
-          <p class="benefit-text">Вебинары, Pitch Nights, брейнштормы, офлайн-встречи. Каждый месяц — насыщенная программа.</p>
+
+        <div class="benefit-station">
+          <span class="station-num">05</span>
+          <div class="station-dot"></div>
+          <div class="station-card">
+            <p class="benefit-title">Регулярный ритм и живые форматы</p>
+            <p class="benefit-text">Вебинары, Pitch Nights, брейнштормы, офлайн-встречи. Каждый месяц — насыщенная программа.</p>
+          </div>
         </div>
+
       </div>
+      <p class="track-hint">← Прокрути вправо →</p>
     </div>
   </div>
 </section>
